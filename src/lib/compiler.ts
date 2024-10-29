@@ -27,7 +27,7 @@ export const compileCode = async (
 
   try {
     const reactImportRegex =
-      /import\s+(?:\*\s+as\s+)?React\s+from\s+['"]react['"]/;
+      /import\s+(?:\*\s+as\s+)?React(?:\s*,\s*\{[^}]*\})?\s+from\s+['"]react['"]/;
     const hasReactImport = reactImportRegex.test(sourceCode);
 
     const reactBanner = hasReactImport ? "" : `import React from 'react';\n`;
@@ -56,7 +56,7 @@ export const compileCode = async (
 };
 
 export function getImportsFromCode(code: string) {
-  const importRegex = /import\s+.*?from\s+['"](.*?)['"];?/g;
+  const importRegex = /import\s+[\s\S]*?\s+from\s+['"](.*?)['"];?/g;
   const imports = [];
   let match;
 
@@ -71,6 +71,7 @@ export async function generateImportMap(
   thirdPartyLibs: string[],
   uiLibs: string[]
 ) {
+  console.log(thirdPartyLibs, uiLibs);
   // 创建模块注册表
   const moduleRegistry = new Map();
 
@@ -114,6 +115,7 @@ export async function generateImportMap(
     imports[componentId] = url;
   }
 
+  console.log(imports);
   // 创建导入映射
   const importMapScript = `
   <script type="importmap">

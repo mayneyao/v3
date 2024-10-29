@@ -9,10 +9,12 @@ export default function MyComponent() {
   const [count, setCount] = useState(0);
   return (
     <div className="container" style={{ padding: '2rem' }}>
-      <h1 className="title">Modern React Component</h1>
+      <h1 className="title">
+        A realtime react component renderer, totally run in your browser
+      </h1>
       <div className="p-4 bg-blue-500 text-white">Hello Tailwind!</div>
-      <div className="content">
-        <p>Count: {count}</p>
+      <p>Count: {count}</p>
+      <div className="flex gap-2">
         <button 
           onClick={() => setCount(prev => prev + 1)}
           style={{
@@ -26,7 +28,7 @@ export default function MyComponent() {
         >
           Increment
         </button>
-        <Button>Button from ui component</Button>
+        <Button onClick={() => setCount(count - 1)}>Decrement</Button>
       </div>
     </div>
   );

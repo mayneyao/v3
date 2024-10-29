@@ -26,6 +26,23 @@ describe("getImportsFromCode", () => {
     expect(imports).toEqual(expectedImports);
   });
 
+  it("multiple lines imports", () => {
+    const code = `
+      import React from 'react';
+      import {
+        Card,
+        CardContent,
+        CardDescription,
+        CardFooter,
+        CardHeader,
+        CardTitle,
+      } from "@/components/ui/card"
+    `;
+    const expectedImports = ["react", "@/components/ui/card"];
+    const imports = getImportsFromCode(code);
+    expect(imports).toEqual(expectedImports);
+  });
+
   it("should return an empty array if there are no import statements", () => {
     const code = `
       const a = 1;
