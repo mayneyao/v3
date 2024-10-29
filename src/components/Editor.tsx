@@ -1,12 +1,10 @@
 import { useState } from "react";
-import { compileCode, initializeCompiler } from "../lib/compiler";
+import { compileCode } from "../lib/compiler";
 import { Preview } from "./Preview";
 
 interface EditorProps {
   initialCode?: string;
 }
-
-await initializeCompiler();
 
 export const Editor: React.FC<EditorProps> = ({ initialCode = "" }) => {
   const [code, setCode] = useState(initialCode);
@@ -24,13 +22,13 @@ export const Editor: React.FC<EditorProps> = ({ initialCode = "" }) => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row gap-4 p-4 w-full h-full">
+    <div className="flex flex-col md:flex-row gap-4 p-2 w-full h-full">
       <div className="flex-1 flex flex-col gap-4 h-full">
         <textarea
           value={code}
           onChange={(e) => setCode(e.target.value)}
           placeholder="输入 React/TypeScript 组件代码..."
-          className="w-full h-full p-4 font-mono text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+          className="w-full h-full p-2 font-mono text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
         />
         <button
           className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
