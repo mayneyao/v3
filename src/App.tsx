@@ -1,35 +1,39 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Editor } from "@/components/Editor";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const initialCode = `
+import { useState } from 'react';
+import { Button } from "@/components/ui/button"
 
+export default function MyComponent() {
+  const [count, setCount] = useState(0);
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+    <div className="container" style={{ padding: '2rem' }}>
+      <h1 className="title">Modern React Component</h1>
+      <div className="p-4 bg-blue-500 text-white">Hello Tailwind!</div>
+      <div className="content">
+        <p>Count: {count}</p>
+        <button 
+          onClick={() => setCount(prev => prev + 1)}
+          style={{
+            padding: '0.5rem 1rem',
+            borderRadius: '0.25rem',
+            border: 'none',
+            background: '#0070f3',
+            color: 'white',
+            cursor: 'pointer'
+          }}
+        >
+          Increment
         </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+        <Button>Button from ui component</Button>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
+};
+`;
+
+  return <Editor initialCode={initialCode} />;
 }
 
-export default App
+export default App;
